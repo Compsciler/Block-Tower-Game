@@ -179,7 +179,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1994260403857186163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 1.5, z: 0}
+  m_LocalPosition: {x: -8, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1994260402609638519}
@@ -203,7 +203,7 @@ MonoBehaviour:
   cannonballPrefab: {fileID: 1162708033025761715, guid: b26680da720768a459255feecd5e53bb,
     type: 3}
   cannonballParentTF: {fileID: 0}
-  maxShotSpeed: 10
+  maxShotSpeed: 15
   shotVelocityMultiplier: 2
   shotPointTF: {fileID: 1994260402718058801}
   trajectoryPointPrefab: {fileID: 7981750541447750582, guid: 09518597658bea64f84dde64aa6f09d6,
