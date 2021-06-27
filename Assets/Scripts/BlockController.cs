@@ -11,6 +11,7 @@ public class BlockController : MonoBehaviour
         Volume
     }
     [SerializeField] PointValueCalculation pointValueCalculation;
+    private float pointValueCalculationOffset = 0.001f;
 
     internal int pointValue;
 
@@ -27,10 +28,10 @@ public class BlockController : MonoBehaviour
                 pointValue = 1;
                 break;
             case PointValueCalculation.Mass:
-                pointValue = Mathf.CeilToInt(GetComponent<Rigidbody>().mass);
+                pointValue = Mathf.CeilToInt(GetComponent<Rigidbody>().mass - pointValueCalculationOffset);
                 break;
             case PointValueCalculation.Volume:
-                pointValue = Mathf.CeilToInt(transform.localScale.x * transform.localScale.y * transform.localScale.z);
+                pointValue = Mathf.CeilToInt(transform.lossyScale.x * transform.lossyScale.y * transform.lossyScale.z - pointValueCalculationOffset);
                 break;
         }
     }

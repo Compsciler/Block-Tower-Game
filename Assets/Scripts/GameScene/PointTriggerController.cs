@@ -21,7 +21,7 @@ public class PointTriggerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        BlockController otherBlockController = other.transform.parent.gameObject.GetComponent<BlockController>();
+        BlockController otherBlockController = other.gameObject.GetComponentInParent<BlockController>();
         if (otherBlockController == null)
         {
             return;
