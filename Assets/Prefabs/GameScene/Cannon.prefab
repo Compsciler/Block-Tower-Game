@@ -164,6 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1994260403857186162}
   - component: {fileID: 1994260403857186161}
+  - component: {fileID: 5085808253444307991}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -213,3 +214,17 @@ MonoBehaviour:
   trajectoryPointStartTime: 0.1
   timeBetweenTrajectoryPoints: 0.1
   scaleChangeBetweenTrajectoryPoints: -0.01
+--- !u!114 &5085808253444307991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994260403857186163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1633ab38afeb0947bed37433ae4e2e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNum: 1
+  scoreText: {fileID: 0}
