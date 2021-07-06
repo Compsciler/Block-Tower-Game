@@ -19,22 +19,28 @@ public class CannonController : MonoBehaviour
     [SerializeField] float timeBetweenTrajectoryPoints;
     [SerializeField] float scaleChangeBetweenTrajectoryPoints;
 
-    // Start is called before the first frame update
+    private bool isUsingBattleSystem = true;
+
+    internal static CannonController[] controllers;
+
+    void Awake()
+    {
+        InitializeCannonControllerLists();
+    }
+
     void Start()
     {
         InitializeTrajectoryPoints();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        GetShotVelocity();
-        transform.right = shotVelocity;
-
-        for (int i = 0; i < trajectoryPoints.Length; i++)
+        if (isUsingBattleSystem)
         {
-            trajectoryPoints[i].transform.position = GetCannonballPos(i * timeBetweenTrajectoryPoints + trajectoryPointStartTime);
+            return;
         }
+
+        DisplayTrajectory();
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -77,5 +83,35 @@ public class CannonController : MonoBehaviour
             float trajectoryPointScaleDimension = i * scaleChangeBetweenTrajectoryPoints + trajectoryPoints[i].transform.localScale.x;
             trajectoryPoints[i].transform.localScale = new Vector3(trajectoryPointScaleDimension, trajectoryPointScaleDimension, trajectoryPointScaleDimension);
         }
+    }
+
+    public void DisplayTrajectory()
+    {
+        GetShotVelocity();
+        transform.right = shotVelocity;
+
+        SetTrajectoryPoints();
+    }
+
+    public void SetTrajectoryPoints()
+    {
+        for (int i = 0; i < trajectoryPoints.Length; i++)
+        {
+            trajectoryPoints[i].transform.position = GetCannonballPos(i * timeBetweenTrajectoryPoints + trajectoryPointStartTime);
+        }
+    }
+
+    public void InitializeCannonControllerLists()
+    {
+        if (controllers == null)
+        {
+            controllers = new CannonController[GameManager.instance.playerCount];
+        }
+        controllers[GetPlayerNum() - 1] = this;
+    }
+
+    public int GetPlayerNum()
+    {
+        return GetComponent<PlayerController>().playerNum;
     }
 }
