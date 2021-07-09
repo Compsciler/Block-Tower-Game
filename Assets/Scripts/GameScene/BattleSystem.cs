@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MEC;
 
+// For button click methods and battle Start() and Update()
 public class BattleSystem : StateMachine<BattleState>
 {
     void Start()
@@ -10,13 +11,8 @@ public class BattleSystem : StateMachine<BattleState>
         SetState(new StartState(this));
     }
 
-    void Update()
+    protected override void Update()
     {
-        Timing.RunCoroutine(state.DisplayTrajectory());
-
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Timing.RunCoroutine(state.Shoot());
-        }
+        base.Update();
     }
 }

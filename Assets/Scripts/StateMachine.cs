@@ -12,7 +12,7 @@ public abstract class StateMachine<StateType> : MonoBehaviour where StateType : 
         Timing.RunCoroutine(state.OnStateEnter());
     }
 
-    void Update()  // LateUpdate() ?
+    protected virtual void Update()
     {
         state.OnStateUpdate();
     }

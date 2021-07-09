@@ -16,6 +16,6 @@ public abstract class State  // Derive with a constructor with a system paramete
 
     public virtual void OnStateUpdate()
     {
-
+        
     }
 }

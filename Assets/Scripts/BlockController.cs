@@ -15,6 +15,13 @@ public class BlockController : MonoBehaviour
 
     internal int pointValue;
 
+    internal static List<GameObject> blockGOs;
+
+    void Awake()
+    {
+        InitializeBlockGOLists();
+    }
+
     void Start()
     {
         SetPointValue();
@@ -34,5 +41,33 @@ public class BlockController : MonoBehaviour
                 pointValue = Mathf.CeilToInt(transform.lossyScale.x * transform.lossyScale.y * transform.lossyScale.z - pointValueCalculationOffset);
                 break;
         }
+    }
+
+    public static float GetMaxSpeedOfBlocks()
+    {
+        float maxSpeed = 0;
+        foreach (GameObject blockGO in blockGOs)
+        {
+            float speed = blockGO.GetComponent<Rigidbody>().velocity.magnitude;
+            if (speed > maxSpeed)
+            {
+                maxSpeed = speed;
+            }
+        }
+        return maxSpeed;
+    }
+
+    public void InitializeBlockGOLists()
+    {
+        if (blockGOs == null)
+        {
+            blockGOs = new List<GameObject>();
+        }
+        blockGOs.Add(gameObject);
+    }
+
+    void OnDestroy()
+    {
+        blockGOs.Remove(gameObject);
     }
 }

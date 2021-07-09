@@ -6,6 +6,6 @@ public class ObjectDestroyerController : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        Destroy(other.GetComponentInParent<Rigidbody>().gameObject);
     }
 }

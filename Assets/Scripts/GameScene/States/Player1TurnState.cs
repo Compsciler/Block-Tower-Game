@@ -7,7 +7,7 @@ public class Player1TurnState : PlayerTurnState
 {
     public Player1TurnState(BattleSystem battleSystem) : base(battleSystem)
     {
-
+        currentPlayer = 1;
     }
 
     public override IEnumerator<float> DisplayTrajectory()

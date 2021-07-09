@@ -7,7 +7,7 @@ public class Player2TurnState : PlayerTurnState
 {
     public Player2TurnState(BattleSystem battleSystem) : base(battleSystem)
     {
-
+        currentPlayer = 2;
     }
 
     public override IEnumerator<float> DisplayTrajectory()

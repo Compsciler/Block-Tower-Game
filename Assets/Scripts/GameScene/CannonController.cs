@@ -101,6 +101,11 @@ public class CannonController : MonoBehaviour
         }
     }
 
+    public void SetTrajectoryPointsActive(bool isActive)
+    {
+        trajectoryPointParentTF.gameObject.SetActive(isActive);
+    }
+
     public void InitializeCannonControllerLists()
     {
         if (controllers == null)
