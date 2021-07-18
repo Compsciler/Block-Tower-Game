@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CannonController : MonoBehaviour
@@ -19,17 +20,23 @@ public class CannonController : MonoBehaviour
     [SerializeField] float timeBetweenTrajectoryPoints;
     [SerializeField] float scaleChangeBetweenTrajectoryPoints;
 
+    [SerializeField] int startingCannonballCount;
+    internal int cannonballCount;
+    [SerializeField] TMP_Text cannonballCountText;
+
     private bool isUsingBattleSystem = true;
 
     internal static CannonController[] controllers;
 
     void Awake()
     {
-        InitializeCannonControllerLists();
+        InitializeControllerLists();
     }
 
     void Start()
     {
+        cannonballCount = startingCannonballCount;
+        SetCannonballCountText();
         InitializeTrajectoryPoints();
     }
 
@@ -42,7 +49,7 @@ public class CannonController : MonoBehaviour
 
         DisplayTrajectory();
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && cannonballCount > 0)
         {
             Shoot();
         }
@@ -65,6 +72,9 @@ public class CannonController : MonoBehaviour
         GameObject cannonBallGO = Instantiate(cannonballPrefab, shotPointTF.position, shotPointTF.rotation);
         cannonBallGO.transform.parent = cannonballParentTF;
         cannonBallGO.GetComponent<Rigidbody>().velocity = shotVelocity;
+
+        cannonballCount--;
+        SetCannonballCountText();
     }
 
     public Vector3 GetCannonballPos(float t)
@@ -106,7 +116,12 @@ public class CannonController : MonoBehaviour
         trajectoryPointParentTF.gameObject.SetActive(isActive);
     }
 
-    public void InitializeCannonControllerLists()
+    public void SetCannonballCountText()
+    {
+        cannonballCountText.text = "Cannonballs: " + cannonballCount;
+    }
+
+    public void InitializeControllerLists()
     {
         if (controllers == null)
         {

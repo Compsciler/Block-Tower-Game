@@ -7,7 +7,7 @@ public class AfterShotState : BattleState
 {
     private float turnTimer = 0f;
 
-    private float maxSpeedOfBlocksAndCannonballsThreshold = 0.3f;
+    private float maxSpeedOfBlocksAndCannonballsThreshold = 0.1f;
 
     private float minTurnTime = 3f;
     private float maxTurnTime = 16f;
@@ -26,6 +26,7 @@ public class AfterShotState : BattleState
     {
         turnTimer += Time.deltaTime;
         float maxSpeedOfBlocksAndCannonballs = GetMaxSpeedOfBlocksAndCannonballs();
+        // Debug.Log(maxSpeedOfBlocksAndCannonballs);
         if (turnTimer >= maxTurnTime)
         {
             GoToNextTurn();
@@ -47,7 +48,6 @@ public class AfterShotState : BattleState
             {
                 CannonballController.DestroyCannonballs();
                 minTurnTimeAfterCannonballsDestroyed = turnTimer + minAddedTurnTimeAfterCannonballsDestroyed;
-                Debug.Log("MIN TURN: " + minTurnTimeAfterCannonballsDestroyed);
             }
         }
     }

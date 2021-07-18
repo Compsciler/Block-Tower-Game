@@ -76,6 +76,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8583005638551693581}
+  - component: {fileID: 301640203483253545}
   m_Layer: 0
   m_Name: Blocks
   m_TagString: Untagged
@@ -137,6 +138,19 @@ Transform:
   m_Father: {fileID: 8583005637801734149}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &301640203483253545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8583005638551693580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2376c2ed7b9ea304d9663409d3f83add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  massMultiplier: 1
 --- !u!1 &8583005639196150589
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,6 +1002,16 @@ PrefabInstance:
         type: 3}
       propertyPath: scoreText
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085808253444307991, guid: a573942eb788eb44db218cee3448882b,
+        type: 3}
+      propertyPath: firstShotScoreMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085808253444307991, guid: a573942eb788eb44db218cee3448882b,
+        type: 3}
+      propertyPath: firstRoundScoreMultiplier
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a573942eb788eb44db218cee3448882b, type: 3}

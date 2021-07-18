@@ -11,7 +11,11 @@ public class BlockController : MonoBehaviour
         Volume
     }
     [SerializeField] PointValueCalculation pointValueCalculation;
-    private float pointValueCalculationOffset = 0.001f;
+
+    [SerializeField] float relativeMass;
+
+    private static int pointMultiplier = 10;
+    private static float pointValueCalculationOffset = 0.001f;
 
     internal int pointValue;
 
@@ -24,6 +28,7 @@ public class BlockController : MonoBehaviour
 
     void Start()
     {
+        GetComponent<Rigidbody>().mass = relativeMass * GetComponentInParent<BlockStackController>().massMultiplier;
         SetPointValue();
     }
 
@@ -35,12 +40,13 @@ public class BlockController : MonoBehaviour
                 pointValue = 1;
                 break;
             case PointValueCalculation.Mass:
-                pointValue = Mathf.CeilToInt(GetComponent<Rigidbody>().mass - pointValueCalculationOffset);
+                pointValue = Mathf.CeilToInt(relativeMass - pointValueCalculationOffset);
                 break;
             case PointValueCalculation.Volume:
                 pointValue = Mathf.CeilToInt(transform.lossyScale.x * transform.lossyScale.y * transform.lossyScale.z - pointValueCalculationOffset);
                 break;
         }
+        pointValue *= pointMultiplier;
     }
 
     public static float GetMaxSpeedOfBlocks()

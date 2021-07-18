@@ -6,6 +6,9 @@ using MEC;
 public abstract class PlayerTurnState : BattleState
 {
     internal static int currentPlayer;
+    internal static int currentRound = 0;
+
+    private CannonController playerCannonController;
 
     public PlayerTurnState(BattleSystem battleSystem) : base(battleSystem)
     {
@@ -14,8 +17,19 @@ public abstract class PlayerTurnState : BattleState
 
     public override IEnumerator<float> OnStateEnter()
     {
+        CannonController playerCannonController = CannonController.controllers[currentPlayer - 1];
+        if (playerCannonController.cannonballCount <= 0)
+        {
+            battleSystem.SetState(new GameOverState(battleSystem));
+            yield break;
+        }
+        PlayerController.ResetAllPlayerScoreMultipliers();
+        if (currentRound == 1)
+        {
+            PlayerController playerController = PlayerController.controllers[currentPlayer - 1];
+            playerController.SetPlayerScoreMultiplier(playerController.firstRoundScoreMultiplier);
+        }
         Timing.RunCoroutine(SetTrajectoryPointsActive(currentPlayer, true));
-        yield return Timing.WaitForOneFrame;
     }
 
     public override void OnStateUpdate()
@@ -26,6 +40,12 @@ public abstract class PlayerTurnState : BattleState
         {
             Timing.RunCoroutine(Shoot());
         }
+    }
+
+    public override IEnumerator<float> OnStateExit()
+    {
+        PlayerController playerController = PlayerController.controllers[currentPlayer - 1];
+        yield return Timing.WaitForOneFrame;
     }
 
     protected IEnumerator<float> DisplayTrajectory(int player)
