@@ -66,4 +66,23 @@ public class PlayerController : MonoBehaviour
         }
         controllers[playerNum - 1] = this;
     }
+
+    public static List<int> GetWinningPlayers()
+    {
+        List<int> winningPlayers = new List<int>();
+        int maxScore = int.MinValue;
+        foreach (PlayerController controller in controllers)
+        {
+            if (controller.score > maxScore)
+            {
+                maxScore = controller.score;
+                winningPlayers = new List<int>{controller.playerNum};
+            }
+            else if (controller.score == maxScore)
+            {
+                winningPlayers.Add(controller.playerNum);
+            }
+        }
+        return winningPlayers;
+    }
 }

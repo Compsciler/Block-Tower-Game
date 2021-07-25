@@ -12,7 +12,7 @@ public class GameOverState : BattleState
 
     public override IEnumerator<float> OnStateEnter()
     {
-        Debug.Log("Game over!");
+        Timing.RunCoroutine(battleSystem.gameOverMenu.GameOver());
         yield return Timing.WaitForOneFrame;
     }
 }

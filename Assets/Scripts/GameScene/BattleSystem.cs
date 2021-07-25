@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
+using UnityEngine.UI;
 
-// For button click methods and battle Start() and Update()
+// For button click methods, GameObject/component references for states, and battle Start() and Update()
 public class BattleSystem : StateMachine<BattleState>
 {
+    [SerializeField] internal Button fastForwardTurnButton;
+    [SerializeField] internal GameOverMenu gameOverMenu;
+
     void Start()
     {
         SetState(new StartState(this));
@@ -14,5 +18,10 @@ public class BattleSystem : StateMachine<BattleState>
     protected override void Update()
     {
         base.Update();
+    }
+
+    public void OnFastForwardTurnButton()
+    {
+        Timing.RunCoroutine(state.FastForwardTurn());
     }
 }

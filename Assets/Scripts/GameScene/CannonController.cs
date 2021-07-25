@@ -28,7 +28,7 @@ public class CannonController : MonoBehaviour
 
     internal static CannonController[] controllers;
 
-    void Awake()
+    void Awake()  // Script Execution Order = -5
     {
         InitializeControllerLists();
     }

@@ -17,6 +17,8 @@ public class AfterShotState : BattleState
 
     private float maxTurnTimeBeforeCannonballsDestroyed = 12f;
 
+    private float fastForwardTimeScale = 3f;
+
     public AfterShotState(BattleSystem battleSystem) : base(battleSystem)
     {
 
@@ -52,8 +54,18 @@ public class AfterShotState : BattleState
         }
     }
 
+    public override IEnumerator<float> FastForwardTurn()
+    {
+        Time.timeScale = fastForwardTimeScale;
+        battleSystem.fastForwardTurnButton.interactable = false;
+        yield return Timing.WaitForOneFrame;
+    }
+
     public void GoToNextTurn()
     {
+        Time.timeScale = 1f;
+        battleSystem.fastForwardTurnButton.interactable = true;
+
         PlayerTurnState.currentPlayer = PlayerTurnState.currentPlayer % GameManager.instance.playerCount + 1;
         switch (PlayerTurnState.currentPlayer)
         {

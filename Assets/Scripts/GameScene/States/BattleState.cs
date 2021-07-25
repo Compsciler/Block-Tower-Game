@@ -21,4 +21,9 @@ public abstract class BattleState : State
     {
         yield return Timing.WaitForOneFrame;
     }
+
+    public virtual IEnumerator<float> FastForwardTurn()
+    {
+        yield return Timing.WaitForOneFrame;
+    }
 }
